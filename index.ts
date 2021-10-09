@@ -1,8 +1,10 @@
 import Connection from "./database/connection";
-import Config from "./database/config";
+import dbConfig from "./database/dbConfig";
+import serverConfig from "./database/serverConfig";
 import * as Env from "./Env"
 export {
     Connection,
-    Config,
+    dbConfig,
+    serverConfig,
     Env
 }

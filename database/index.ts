@@ -1,5 +1,5 @@
 import connection from "./connection"
-import config from "./config"
+import config from "./dbConfig"
 
 export {
     connection,

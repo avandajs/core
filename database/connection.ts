@@ -1,6 +1,6 @@
 import {runtimeError} from "@avanda/error";
 import {Sequelize} from "sequelize";
-import Config from "./config";
+import Config from "./dbConfig";
 
 export default async function (config: Config): Promise<Sequelize> {
 
