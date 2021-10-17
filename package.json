@@ -1,6 +1,6 @@
 {
   "name": "@avanda/app",
-  "version": "0.10.2",
+  "version": "0.10.9",
   "description": "Avanda core module",
   "main": "./build/index.js",
   "types": "index.ts",
