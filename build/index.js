@@ -22,8 +22,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Env = exports.Connection = void 0;
+exports.Schema = exports.Env = exports.Connection = void 0;
 const connection_1 = __importDefault(require("./database/connection"));
 exports.Connection = connection_1.default;
+const Schema_1 = __importDefault(require("./schema/Schema"));
+exports.Schema = Schema_1.default;
 const Env = __importStar(require("./Env"));
 exports.Env = Env;
+const App = __importStar(require("./App"));
+exports.default = App;
