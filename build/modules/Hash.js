@@ -18,22 +18,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mail = exports.Token = exports.Validator = exports.Hash = exports.Env = exports.Connection = void 0;
-const connection_1 = __importDefault(require("./database/connection"));
-exports.Connection = connection_1.default;
-const Validator = __importStar(require("./modules/Validator"));
-exports.Validator = Validator;
-const Mail = __importStar(require("./modules/Mailer/Mail"));
-exports.Mail = Mail;
-const Token = __importStar(require("./modules/Token"));
-exports.Token = Token;
-const Hash = __importStar(require("./modules/Hash"));
-exports.Hash = Hash;
-const Env = __importStar(require("./modules/Env"));
-exports.Env = Env;
-const App = __importStar(require("./modules/App"));
-exports.default = App;
+exports.random = exports.verify = exports.make = void 0;
+const argon2 = __importStar(require("argon2"));
+let make = async function (value) {
+    return await argon2.hash(value);
+};
+exports.make = make;
+let verify = async function (hash, value) {
+    return await argon2.verify(hash, value);
+};
+exports.verify = verify;
+let random = function (length = 20) {
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let token = '';
+    for (let i = 0; i < length; i++) {
+        token += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return token;
+};
+exports.random = random;
