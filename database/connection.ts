@@ -1,10 +1,14 @@
 import {runtimeError} from "@avanda/error";
 import {Sequelize} from "sequelize";
-import Config from "./dbConfig";
+import Config from "../configs/dbConfig";
+let connection: Sequelize;
 
 export default async function (config: Config): Promise<Sequelize> {
 
-    let connection = new Sequelize(
+    if (connection) {
+        return connection;
+    }
+    connection = new Sequelize(
         config.dbName,
         config.dbUser,
         config.dbPassword,
