@@ -12,14 +12,15 @@ async function send(msg, state = {}) {
     msg(message);
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer_1.default.createTransport({
-        host: index_1.Env.get('SMTP_HOST'),
-        port: index_1.Env.get('SMTP_PORT'),
+        host: index_1.Env.get('SMTP_HOST', undefined),
+        port: index_1.Env.get('SMTP_PORT', undefined),
         secure: index_1.Env.get('SMTP_SECURE') == 'true',
         auth: {
-            user: index_1.Env.get('SMTP_USER'),
-            pass: index_1.Env.get('SMTP_PASS'), // generated ethereal password
+            user: index_1.Env.get('SMTP_USER', undefined),
+            pass: index_1.Env.get('SMTP_PASS', undefined), // generated ethereal password
         },
     });
+    console.log({ transporter });
     //    send mail now
     let toSend = {
         from: typeof message._from == 'string' ? message._from : `"${message._from.name}" <${message._from.email}>`,
@@ -36,6 +37,8 @@ async function send(msg, state = {}) {
         return await transporter.sendMail(toSend);
     }
     catch (e) {
+        console.log({ mailerError: e });
+        throw new Error(e.message);
         return false;
     }
 }
