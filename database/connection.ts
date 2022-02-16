@@ -14,7 +14,7 @@ export default async function (config: Config): Promise<Sequelize> {
         config.dbPassword,
         {
             host: process.env.DB_HOST,
-            port: 3307,
+            port: config.port,
             dialect: config.dbDialect
         });
 

@@ -3,7 +3,8 @@ type dbConfig = {
     dbUser: string,
     dbPassword: string,
     dbDialect: 'mysql' | 'mariadb' | 'postgres' | 'mssql',
-    socketPath?: string
+    socketPath?: string,
+    port?: number
 }
 
 export default dbConfig
