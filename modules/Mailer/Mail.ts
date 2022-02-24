@@ -2,7 +2,7 @@ import Message from "./Message";
 import nodemailer from "nodemailer"
 import {Env} from "../../index";
 
-async function send<StateStruct>(msg: (message: Message<StateStruct | any>) => any,state: StateStruct | any = {}) {
+export async function send<StateStruct>(msg: (message: Message<StateStruct | any>) => any,state: StateStruct | any = {}) {
     let message = new Message<StateStruct>(state)
     msg(message)
     // create reusable transporter object using the default SMTP transport
@@ -15,8 +15,6 @@ async function send<StateStruct>(msg: (message: Message<StateStruct | any>) => a
             pass: Env.get('SMTP_PASS', undefined), // generated ethereal password
         },
     });
-
-    console.log({transporter})
 
 //    send mail now
     let toSend = {
@@ -38,10 +36,4 @@ async function send<StateStruct>(msg: (message: Message<StateStruct | any>) => a
         return false
     }
 
-}
-interface Template {
-
-}
-export {
-    send
 }

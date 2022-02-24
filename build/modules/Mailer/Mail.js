@@ -20,7 +20,6 @@ async function send(msg, state = {}) {
             pass: index_1.Env.get('SMTP_PASS', undefined), // generated ethereal password
         },
     });
-    console.log({ transporter });
     //    send mail now
     let toSend = {
         from: typeof message._from == 'string' ? message._from : `"${message._from.name}" <${message._from.email}>`,

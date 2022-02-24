@@ -13,7 +13,7 @@ async function default_1(config) {
         dialect: config.dbDialect
     });
     try {
-        await connection.authenticate({ logging: false });
+        await connection.authenticate({ logging: console.log });
     }
     catch (error) {
         throw new error_1.runtimeError('Unable to connect to the database:' + error);

@@ -22,13 +22,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mail = exports.Token = exports.Validator = exports.Hash = exports.Env = exports.Connection = void 0;
+exports.Mail = exports.Token = exports.Validator = exports.Hash = exports.Env = exports.SMS = exports.Connection = void 0;
 const connection_1 = __importDefault(require("./database/connection"));
 exports.Connection = connection_1.default;
 const Validator = __importStar(require("./modules/Validator"));
 exports.Validator = Validator;
 const Mail = __importStar(require("./modules/Mailer/Mail"));
 exports.Mail = Mail;
+const Sms_1 = __importDefault(require("./modules/SMS/Sms"));
+exports.SMS = Sms_1.default;
 const Token = __importStar(require("./modules/Token"));
 exports.Token = Token;
 const Hash = __importStar(require("./modules/Hash"));
