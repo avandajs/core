@@ -7,8 +7,8 @@ let verify = async function (hash: string,value: string): Promise<boolean>{
     return await argon2.verify(hash, value)
 }
 
-let random = function (length: number = 20) {
-    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+let random = function (length: number = 20,numberOnly = false) {
+    let chars = numberOnly ? '0123456789':'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let token = '';
     for(let i = 0; i < length; i++) {
         token += chars[Math.floor(Math.random() * chars.length)];
