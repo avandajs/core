@@ -4,7 +4,8 @@ type dbConfig = {
     dbPassword: string,
     dbDialect: 'mysql' | 'mariadb' | 'postgres' | 'mssql',
     socketPath?: string,
-    port?: number
+    port?: number,
+    logging?: boolean | ((sql: string, timing?: number) => void);
 }
 
 export default dbConfig

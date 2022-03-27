@@ -19,7 +19,7 @@ export default async function (config: Config): Promise<Sequelize> {
         });
 
     try {
-        await connection.authenticate({logging: console.log})
+        await connection.authenticate({logging: config.logging})
     }catch (error){
         throw new runtimeError('Unable to connect to the database:' + error)
     }

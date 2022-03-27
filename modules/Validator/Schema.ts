@@ -32,17 +32,17 @@ export default class Schema{
             for (let rulesKey in schema.rules){
                 let rule = schema.rules[rulesKey]
                 let check = await checkers[rulesKey](value,rule.rule,prop);
-                console.log({check,value})
+                // console.log({check,value})
                 if (!check || typeof check == 'string'){
                     let errMsg = typeof check == 'string' ? check : rule.errorMsg
                     errors[prop] = typeof errMsg == 'function' ? errMsg(prop,value) : errMsg
-                    console.log({errorToPush: errors[prop]})
+                    // console.log({errorToPush: errors[prop]})
                     break;
                 }
             }
         }
 
-        console.log({errors})
+        // console.log({errors})
         return errors;
 
     }
