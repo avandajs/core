@@ -8,7 +8,7 @@ async function default_1(config) {
         return connection;
     }
     connection = new sequelize_1.Sequelize(config.dbName, config.dbUser, config.dbPassword, {
-        host: process.env.DB_HOST,
+        host: config.dbHost,
         port: config.port,
         dialect: config.dbDialect
     });
