@@ -6,6 +6,9 @@ type dbConfig = {
     dbDialect: 'mysql' | 'mariadb' | 'postgres' | 'mssql',
     socketPath?: string,
     port?: number,
+    retry?: number,
+    ssl?: boolean,
+    timeout?: number,
     logging?: boolean | ((sql: string, timing?: number) => void);
 }
 

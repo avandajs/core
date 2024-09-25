@@ -5,7 +5,6 @@ import Locales from "./types/Locales";
 
 export default class Rule {
     rules: RuleStruct = {
-
     }
 
     prevRule?: string
@@ -57,19 +56,21 @@ export default class Rule {
         return this
     }
 
-    unique(model: Model | any){
+    unique(model: Model | any, key?: string){
         this.prevRule = 'unique'
         this.rules['unique'] = {
             rule: model,
-            errorMsg: key => `${key} already exists`
+            errorMsg: key => `${key} already exists`,
+            key
         }
         return this
     }
-    exists(model: Model | any){
+    exists(model: Model | any, key?: string){
         this.prevRule = 'exists'
         this.rules['exists'] = {
             rule: model,
-            errorMsg: key => `${key} is not recognized`
+            errorMsg: key => `${key} is not recognized`,
+            key
         }
         return this
     }

@@ -30,7 +30,7 @@ class Schema {
             let value = data[prop];
             for (let rulesKey in schema.rules) {
                 let rule = schema.rules[rulesKey];
-                let check = await checkers[rulesKey](value, rule.rule, prop);
+                let check = await checkers[rulesKey](value, rule.rule, rule.key || prop);
                 // console.log({})
                 if (!check || typeof check == 'string') {
                     let errMsg = typeof check == 'string' ? check : rule.errorMsg;

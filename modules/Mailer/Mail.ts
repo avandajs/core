@@ -8,12 +8,13 @@ async function send<StateStruct>(msg: (message: Message<StateStruct | any>) => a
     // create reusable transporter object using the default SMTP transport
 
     let secure = Env.get('SMTP_SECURE') == 'true'
+    let useAuth = !!Env.get('SMTP_USER', undefined)
     let configs = {
         host: Env.get('SMTP_HOST',undefined),
         port: Env.get('SMTP_PORT', undefined),
         secure, // true for 465, false for other ports
     }
-    if (secure){
+    if (useAuth){
         configs['auth'] = {
             user: Env.get('SMTP_USER', undefined), // generated ethereal user
             pass: Env.get('SMTP_PASS', undefined), // generated ethereal password
@@ -25,6 +26,7 @@ async function send<StateStruct>(msg: (message: Message<StateStruct | any>) => a
         from: typeof message._from == 'string' ? message._from:`"${message._from.name}" <${message._from.email}>`, // sender address
         to: message._to, // list of receivers
         subject: message._subject, // Subject line
+        replyTo: message._replyTo
     }
 
     if (message.isHtml){

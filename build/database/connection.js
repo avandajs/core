@@ -10,13 +10,30 @@ async function default_1(config) {
     connection = new sequelize_1.Sequelize(config.dbName, config.dbUser, config.dbPassword, {
         host: config.dbHost,
         port: config.port,
-        dialect: config.dbDialect
+        dialect: config.dbDialect,
+        retry: {
+            match: [
+                sequelize_1.ConnectionError,
+                sequelize_1.ConnectionTimedOutError,
+                sequelize_1.TimeoutError,
+                /Deadlock/i,
+                "SQLITE_BUSY",
+            ],
+            max: config.retry || 3,
+        },
+        logging: config.logging,
+        dialectOptions: {
+            ssl: config.ssl ? {
+                require: true,
+                rejectUnauthorized: false,
+            } : undefined
+        }
     });
     try {
         await connection.authenticate({ logging: config.logging });
     }
     catch (error) {
-        throw new error_1.runtimeError('Unable to connect to the database:' + error);
+        throw new error_1.runtimeError("Unable to connect to the database:" + error);
     }
     return connection;
 }

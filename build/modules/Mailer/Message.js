@@ -17,6 +17,10 @@ class Message {
         this._to = to;
         return this;
     }
+    replyTo(to) {
+        this._replyTo = to;
+        return this;
+    }
     subject(text) {
         this._subject = text;
         return this;

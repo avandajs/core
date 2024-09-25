@@ -3,6 +3,7 @@ import Mustache from "mustache"
 export default class Message<StateStruct> {
     _from: Email
     _to: string
+    _replyTo: string
     _subject: string
     _body: string
 
@@ -16,6 +17,10 @@ export default class Message<StateStruct> {
     }
     to(to: string){
         this._to = to
+        return this;
+    }
+    replyTo(to: string){
+        this._replyTo = to
         return this;
     }
     subject(text: string){

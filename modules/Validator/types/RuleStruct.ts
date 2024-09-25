@@ -44,10 +44,12 @@ export default interface RuleStruct{
     },
     unique?: {
         rule: Model | any,
-        errorMsg: string | ((key,val) => string)
+        errorMsg: string | ((key,val) => string),
+        key?: string | undefined,
     },
     exists?: {
         rule: Model | any,
+        key?: string | undefined,
         errorMsg: string | ((key,val) => string)
     },
     custom?: {

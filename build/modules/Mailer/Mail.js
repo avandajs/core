@@ -12,12 +12,13 @@ async function send(msg, state = {}) {
     msg(message);
     // create reusable transporter object using the default SMTP transport
     let secure = index_1.Env.get('SMTP_SECURE') == 'true';
+    let useAuth = !!index_1.Env.get('SMTP_USER', undefined);
     let configs = {
         host: index_1.Env.get('SMTP_HOST', undefined),
         port: index_1.Env.get('SMTP_PORT', undefined),
         secure, // true for 465, false for other ports
     };
-    if (secure) {
+    if (useAuth) {
         configs['auth'] = {
             user: index_1.Env.get('SMTP_USER', undefined),
             pass: index_1.Env.get('SMTP_PASS', undefined), // generated ethereal password
@@ -28,7 +29,8 @@ async function send(msg, state = {}) {
     let toSend = {
         from: typeof message._from == 'string' ? message._from : `"${message._from.name}" <${message._from.email}>`,
         to: message._to,
-        subject: message._subject, // Subject line
+        subject: message._subject,
+        replyTo: message._replyTo
     };
     if (message.isHtml) {
         toSend['html'] = message._body;

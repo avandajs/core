@@ -42,19 +42,21 @@ class Rule {
         };
         return this;
     }
-    unique(model) {
+    unique(model, key) {
         this.prevRule = 'unique';
         this.rules['unique'] = {
             rule: model,
-            errorMsg: key => `${key} already exists`
+            errorMsg: key => `${key} already exists`,
+            key
         };
         return this;
     }
-    exists(model) {
+    exists(model, key) {
         this.prevRule = 'exists';
         this.rules['exists'] = {
             rule: model,
-            errorMsg: key => `${key} is not recognized`
+            errorMsg: key => `${key} is not recognized`,
+            key
         };
         return this;
     }
