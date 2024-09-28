@@ -1,6 +1,6 @@
 {
   "name": "@avanda/app",
-  "version": "2.5.0",
+  "version": "2.7.0",
   "description": "Avanda core module",
   "main": "./build/index.js",
   "types": "index.ts",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@avanda/error": "^0.2.3",
+    "@avanda/http": "^0.4.8",
     "@avanda/orm": "^0.2.40",
     "@types/jsonwebtoken": "^8.5.6",
     "@types/mustache": "^4.1.2",

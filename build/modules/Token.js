@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -22,17 +26,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.decode = exports.generate = void 0;
 const jwt = __importStar(require("jsonwebtoken"));
 const index_1 = require("../index");
-let generate = async function (payload, expiresIn = null) {
+let generate = async function (payload, expiresIn = null, key = null) {
     return new Promise((resolve, reject) => {
-        let jwt_key = index_1.Env.get('JWT_KEY', null);
-        let jwt_expiry = expiresIn !== null && expiresIn !== void 0 ? expiresIn : index_1.Env.get('JWT_KEY_EXPIRES_IN', null);
+        let jwt_key = key !== null && key !== void 0 ? key : index_1.Env.get("JWT_KEY", null);
+        let jwt_expiry = expiresIn !== null && expiresIn !== void 0 ? expiresIn : index_1.Env.get("JWT_KEY_EXPIRES_IN", null);
         if (!jwt_key) {
-            reject('Specify JWT_KEY in .env file ');
+            reject("Specify JWT_KEY in .env file ");
             return;
         }
         jwt.sign(payload, jwt_key, {
             expiresIn: jwt_expiry,
-            algorithm: index_1.Env.get('JWT_ALGORITHM', 'HS256')
+            algorithm: index_1.Env.get("JWT_ALGORITHM", "HS256"),
         }, (err, encoded) => {
             if (err) {
                 reject(err.message);
@@ -43,11 +47,11 @@ let generate = async function (payload, expiresIn = null) {
     });
 };
 exports.generate = generate;
-let decode = async function (token) {
-    let jwt_key = index_1.Env.get('JWT_KEY', null);
+let decode = async function (token, key = null) {
+    let jwt_key = key !== null && key !== void 0 ? key : index_1.Env.get("JWT_KEY", null);
     return new Promise((resolve, reject) => {
         if (!jwt_key) {
-            reject('Specify JWT_KEY in .env file ');
+            reject("Specify JWT_KEY in .env file ");
             return;
         }
         jwt.verify(token, jwt_key, function (err, decoded) {
